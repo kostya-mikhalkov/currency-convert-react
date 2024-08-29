@@ -15,13 +15,7 @@ function App() {
       .then(data =>{ 
         setState(data)
       })
-  }, [])
-  // useEffect(() => {
-  //   if (state && state.conversion_rates) {
-  //     console.log(state.conversion_rates);
-  //   }
-
-  // }, [state])
+  }, [request])
 
   return (
     <MyContext.Provider value={state}>
