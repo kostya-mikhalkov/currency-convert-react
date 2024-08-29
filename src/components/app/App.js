@@ -1,35 +1,32 @@
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { fetchCurrencies, setCurrencies } from "../../currencySlice/currencySlice";
+import { useEffect, createContext } from "react";
 import { useHttp } from "../../utils/api";
 import { useState } from "react";
 
 import CurrencyConverter from "../CurrencyConverter/CurrencyConverter";
 
+export const MyContext = createContext();
 
 function App() {
   const [state, setState] = useState();
-  const dispatch = useDispatch();
-  const{currency} = useSelector(state => state.currency)
+
   const {request} = useHttp();
   useEffect(() => {
     request('USD')
       .then(data =>{ 
         setState(data)
-        dispatch(setCurrencies(data.conversion_rates))
       })
   }, [])
-  useEffect(() => {
-    if (state && state.conversion_rates) {
-      console.log(state.conversion_rates);
-      console.log(currency)
-    }
+  // useEffect(() => {
+  //   if (state && state.conversion_rates) {
+  //     console.log(state.conversion_rates);
+  //   }
 
-  }, [state])
+  // }, [state])
 
   return (
-    <CurrencyConverter />
+    <MyContext.Provider value={state}>
+      <CurrencyConverter />
+    </MyContext.Provider>
   );
 }
 
