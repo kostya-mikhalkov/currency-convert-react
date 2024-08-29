@@ -18,7 +18,7 @@ const CurrencyForm = () => {
         request(currency)
                 .then(data => setAnswer(data))
                 .catch(err => console.log(err))
-    }, [currency])
+    }, [currency, request])
     useEffect(() => {
         setBanner(converted.slice(0, 2))
     }, [converted])

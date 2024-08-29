@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useHttp } from "../utils/api";
 
 const initialState = {
     currency:{},
